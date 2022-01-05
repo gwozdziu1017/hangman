@@ -1,0 +1,32 @@
+Hangman project is another project opened by me to practice C++ development skills.
+Hopefully this project will be finished.
+
+Created by: gwozdziu
+Start date: 04.01.2022
+
+Purpose of the project: Hangman game
+Description:
+At the beginning user can choose how many people will play the game (up to 4 players)
+
+Single game mode:
+User will play by himself.
+Game needs to import randomly choosen word from words database and then player needs to guess the word.
+	minimum requirement: Failure counter - program counts up to 7 mistakes taken by user (may be less because I think maybe 7 is too much)
+	second proposition: Lives counter - at the beggining user can se 7 lives and each mistake will reduce number of lives by 1
+	best approach     : classical hangman is being draw each time user fails
+After winnig or loosing user is informed on the screen
+
+Multiplayer mode:
+User needs to select how many palyers will play.
+Each player nedds to fill "name" field.
+Word is imported like in single player mode.
+Players take turn in order to guess given word.
+Failure counter is the same as in singleplayer mode.
+
+Choosen word is seen like "_ _ _ _ " and every guessed letter is show as many times as it occurs in the word.
+
+Classes and their purpose:
+GameHanlder.h - class that is responsible for handling whole gameplay
+WordHandler.h - word handling means drawing word from database and checking given letters and fulfilling the word.
+Player.h - class responsible for player handling - name, no of fails etc
+Menu.h - menu handling
