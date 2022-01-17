@@ -10,25 +10,24 @@ string WordHandler::whGetWordFromDatabase()
 	return "HANGMAN";
 }
 
-short WordHandler::whGetNoOfLettersInWord(string _word)
+void WordHandler::setTheWord()
 {
-	return _word.length;
+	this->sTheWord = this->whGetWordFromDatabase();
 }
 
-bool WordHandler::whFillTheWord(char _letter)
+string WordHandler::getTheWord()
 {
-	bool isFoundInWord = false;
+	return this->sTheWord;
+}
 
-	for (short i = 0; i < this->sTheWord->length; i++)
-	{
-		if (_letter == sTheWord->at(i))
-		{
-			whShowLetterAtGivenIndex(i);
-			whPutLetterIntoUsedLetters(_letter);
-			isFoundInWord = true;
-		}
-	}
-	return isFoundInWord;
+string WordHandler::getCurrentWord()
+{
+	return this->sCurrentWord;
+}
+
+int WordHandler::whGetNoOfLettersInTheWord()
+{
+	return this->sTheWord.length();
 }
 
 bool WordHandler::whIsLetterAlreadyUsed(char _letter)
@@ -42,26 +41,59 @@ bool WordHandler::whIsLetterAlreadyUsed(char _letter)
 		return false;
 }
 
-void WordHandler::whShowLetterAtGivenIndex(short _index)
-{
-}
-
 void WordHandler::whPutLetterIntoUsedLetters(char _letter)
 {
-	this->sTheWord->push_back(_letter);
+	vAlreadyUsedLetters.push_back(_letter);
 }
 
-void WordHandler::whCheckTheWord(char _letter)
+void WordHandler::fillCurrentWordWithDashesOnly(short _noOfLetters)
 {
-	for (int i = 0; i < this->sTheWord->length; i++)
+	for (short i = 0; i++; i < _noOfLetters)
 	{
-		if (_letter == sTheWord->at(i))
-		{
-			this->vGuessedLettersIndexes->insert(i);
-		}
+		sCurrentWord.append("_");
 	}
 }
 
-void WordHandler::whPrintCurrentWord()
+void WordHandler::fillCurrentWordWithGuessedLetters()
 {
+	for (int i = 0; i < correctIndexes.size(); i++)
+	{
+		sCurrentWord.at(i) = sTheWord.at(i);
+	}
 }
+
+bool WordHandler::isLetterInTheWord(char _letter)
+{
+	for (short i = 0; i < sTheWord.length(); i++)
+	{
+		if (sTheWord.at(i) == _letter)
+			return true;
+	}
+	return false;
+}
+
+void WordHandler::setTheCorrectIndexes(char _letter)
+{
+	for (short i = 0; i < sTheWord.length(); i++)
+	{
+		if (_letter == (char)sTheWord.at(i))
+		{
+			correctIndexes.push_back(i);
+		}
+	}
+	std::sort(correctIndexes.begin(), correctIndexes.end());
+}
+
+std::vector<int> WordHandler::getTheCorrectIndexes()
+{
+	return this->correctIndexes;
+}
+
+bool WordHandler::isWholeWordGuessed()
+{
+	if (sCurrentWord.size() == sTheWord.size())	//TODO check if this is correct
+		return true;
+	else
+		return false;
+}
+

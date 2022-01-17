@@ -25,16 +25,22 @@ public:
 	~WordHandler();
 protected:
 	string whGetWordFromDatabase();
-	short whGetNoOfLettersInWord(string _word);
-	bool whFillTheWord(char _letter);  // filling the word and returns true if letter was found in the word
+	void setTheWord();
+	string getTheWord();
+	string getCurrentWord();
+	int whGetNoOfLettersInTheWord();
 	bool whIsLetterAlreadyUsed(char _letter);  // checks if letter was previously used
-	void whShowLetterAtGivenIndex(short _index);
 	void whPutLetterIntoUsedLetters(char _letter);
-	void whCheckTheWord(char _letter);	// checks if letters given by user match with the word and returns on which indexes there is match
-	void whPrintCurrentWord();
+	void fillCurrentWordWithDashesOnly(short _noOfLetters); // fills current word with '_'
+	void fillCurrentWordWithGuessedLetters();
+	bool isLetterInTheWord(char _letter);
+	void setTheCorrectIndexes(char _letter);
+	std::vector<int> getTheCorrectIndexes();
+	bool isWholeWordGuessed();
 private:
-	string* sTheWord;
+	string sTheWord;
 	std::vector<char> vAlreadyUsedLetters;
-	std::set<short>* vGuessedLettersIndexes;
-	string* sCurrentWord;
+	std::set<short> vGuessedLettersIndexes;
+	std::vector<int> correctIndexes;
+	string sCurrentWord;
 };
