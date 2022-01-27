@@ -25,6 +25,7 @@ char GameHandler::getUserInput_char()
 
 void GameHandler::startGame()
 {
+	Menu::showMenu();
 	short tempUserInput_short = getUserInput_short();
 	switch (tempUserInput_short)
 	{
