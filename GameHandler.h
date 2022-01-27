@@ -13,7 +13,7 @@
 
 class GameHandler : public Menu, PlayerHandler, WordHandler {
 public:
-	GameHandler() {};
+	GameHandler() { noOfPlayers = 0; letter = 'a'; theWord = ""; };
 	~GameHandler() {};
 	void startGame(); // get input and start single or multiplayer
 protected:
@@ -33,6 +33,6 @@ private:
 	char letter; // TODO it could be a char
 	std::string theWord;
 
-	WordHandler* wordHandlerInstance;
+	//WordHandler* wordHandlerInstance;
 	//Menu* menu;
 };

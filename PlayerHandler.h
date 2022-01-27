@@ -7,7 +7,7 @@ typedef std::string string;
 
 class PlayerHandler {
 public:
-	PlayerHandler() {};
+	PlayerHandler();
 	~PlayerHandler() {};
 protected:
 	void setUserName(string _userName);

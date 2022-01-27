@@ -2,7 +2,7 @@
 
 void Menu::fillMenuContext()
 {
-	menuContext.append("----- HANGMAN -----\n");
+	menuContext = "----- HANGMAN -----\n";
 	menuContext.append("Menu:\n");
 	menuContext.append("[1] Singleplayer mode\n");
 	menuContext.append("[2] Multiplayer mode\n");
@@ -18,7 +18,7 @@ void Menu::askForNoOfPlayers()
 
 void Menu::fillAskforNoOfPlayerMenuContext()
 {
-	askforNoOfPlayerMenuContext.append("Insert no of players: ");
+	askforNoOfPlayerMenuContext = "Insert no of players: ";
 }
 
 void Menu::printWord(std::string _word)
@@ -28,12 +28,19 @@ void Menu::printWord(std::string _word)
 
 void Menu::fillAskForLetterMenuContext()
 {
-	askForLetterMenuContext = "Your letter: ";
+	this->askForLetterMenuContext = "Your letter: ";
 }
 
 void Menu::printAskForLetterMenu()
 {
-	std::cout << askForLetterMenuContext;
+	std::cout << this->askForLetterMenuContext;
+}
+
+void Menu::fillAllMenuContexts()
+{
+	fillMenuContext();
+	fillAskForLetterMenuContext();
+	fillAskforNoOfPlayerMenuContext();
 }
 
 void Menu::showMenu()

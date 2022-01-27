@@ -22,7 +22,7 @@ class WordHandler
 {
 public:
 	WordHandler();
-	~WordHandler();
+	~WordHandler() {};
 protected:
 	string whGetWordFromDatabase();
 	void setTheWord();
@@ -38,9 +38,9 @@ protected:
 	std::vector<int> getTheCorrectIndexes();
 	bool isWholeWordGuessed();
 private:
-	string sTheWord;
-	std::vector<char> vAlreadyUsedLetters;
-	std::set<short> vGuessedLettersIndexes;
-	std::vector<int> correctIndexes;
-	string sCurrentWord;
+	string theWord;
+	std::vector<char> vectorAlreadyUsedLetters;
+	std::set<short> setGuessedLettersIndexes;
+	std::vector<int> vectorCorrectIndexes;
+	string currentWord;
 };

@@ -10,7 +10,7 @@
 
 class Menu {
 public:
-	Menu() { fillMenuContext(); };
+	Menu() { fillAllMenuContexts(); };
 	~Menu() {};
 
 protected:
@@ -21,6 +21,7 @@ protected:
 	void printWord(std::string _word);
 	void fillAskForLetterMenuContext();
 	void printAskForLetterMenu();
+	void fillAllMenuContexts();
 	
 private:
 	std::string menuContext;

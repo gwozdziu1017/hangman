@@ -1,8 +1,12 @@
 #include "WordHandler.h"
 
-WordHandler::WordHandler() : sTheWord(nullptr), vAlreadyUsedLetters(0), sCurrentWord(nullptr) {}
-WordHandler::~WordHandler() {}
 
+WordHandler::WordHandler() : theWord(""),
+							vectorAlreadyUsedLetters(),
+							setGuessedLettersIndexes(),
+							vectorCorrectIndexes(),
+							currentWord("")
+{ }
 
 string WordHandler::whGetWordFromDatabase()
 {
@@ -12,30 +16,30 @@ string WordHandler::whGetWordFromDatabase()
 
 void WordHandler::setTheWord()
 {
-	this->sTheWord = this->whGetWordFromDatabase();
+	this->theWord.assign(this->whGetWordFromDatabase());
 }
 
 string WordHandler::getTheWord()
 {
-	return this->sTheWord;
+	return this->theWord;
 }
 
 string WordHandler::getCurrentWord()
 {
-	return this->sCurrentWord;
+	return this->currentWord;
 }
 
 int WordHandler::whGetNoOfLettersInTheWord()
 {
-	return this->sTheWord.length();
+	return this->theWord.length();
 }
 
 bool WordHandler::whIsLetterAlreadyUsed(char _letter)
 {
-	if (vAlreadyUsedLetters.empty())
+	if (vectorAlreadyUsedLetters.empty())
 		return false;
 
-	if (std::find(vAlreadyUsedLetters.begin(), vAlreadyUsedLetters.end(), _letter) != vAlreadyUsedLetters.end())
+	if (std::find(vectorAlreadyUsedLetters.begin(), vectorAlreadyUsedLetters.end(), _letter) != vectorAlreadyUsedLetters.end())
 		return true;
 	else
 		return false;
@@ -43,30 +47,30 @@ bool WordHandler::whIsLetterAlreadyUsed(char _letter)
 
 void WordHandler::whPutLetterIntoUsedLetters(char _letter)
 {
-	vAlreadyUsedLetters.push_back(_letter);
+	vectorAlreadyUsedLetters.push_back(_letter);
 }
 
 void WordHandler::fillCurrentWordWithDashesOnly(short _noOfLetters)
 {
 	for (short i = 0; i++; i < _noOfLetters)
 	{
-		sCurrentWord.append("_");
+		currentWord.append("_"); // pusty current word
 	}
 }
 
 void WordHandler::fillCurrentWordWithGuessedLetters()
 {
-	for (int i = 0; i < correctIndexes.size(); i++)
+	for (auto i : vectorCorrectIndexes)
 	{
-		sCurrentWord.at(i) = sTheWord.at(i);
+		currentWord.insert(i, 1, theWord[i]);
 	}
 }
 
 bool WordHandler::isLetterInTheWord(char _letter)
 {
-	for (short i = 0; i < sTheWord.length(); i++)
+	for (auto letterInTheWord : theWord)
 	{
-		if (sTheWord.at(i) == _letter)
+		if (letterInTheWord == _letter)
 			return true;
 	}
 	return false;
@@ -74,24 +78,26 @@ bool WordHandler::isLetterInTheWord(char _letter)
 
 void WordHandler::setTheCorrectIndexes(char _letter)
 {
-	for (short i = 0; i < sTheWord.length(); i++)
+	short tempIndex = 0;
+	for (auto letterInTheWord : theWord)
 	{
-		if (_letter == (char)sTheWord.at(i))
+		if (_letter == letterInTheWord)
 		{
-			correctIndexes.push_back(i);
+			vectorCorrectIndexes.push_back(tempIndex);
 		}
+		tempIndex++;
 	}
-	std::sort(correctIndexes.begin(), correctIndexes.end());
+	std::sort(vectorCorrectIndexes.begin(), vectorCorrectIndexes.end());
 }
 
 std::vector<int> WordHandler::getTheCorrectIndexes()
 {
-	return this->correctIndexes;
+	return this->vectorCorrectIndexes;
 }
 
 bool WordHandler::isWholeWordGuessed()
 {
-	if (sCurrentWord.size() == sTheWord.size())	//TODO check if this is correct
+	if (currentWord == theWord)
 		return true;
 	else
 		return false;

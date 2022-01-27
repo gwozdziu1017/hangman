@@ -1,5 +1,8 @@
 #include "PlayerHandler.h"
 
+PlayerHandler::PlayerHandler() : userName(" "), userLives(5)
+{ }
+
 void PlayerHandler::setUserName(string _userName)
 {
 	this->userName = _userName;

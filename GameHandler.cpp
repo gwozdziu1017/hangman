@@ -81,6 +81,7 @@ void GameHandler::startSingleplayerMode()
 			{
 				WordHandler::setTheCorrectIndexes(this->letter);
 				WordHandler::fillCurrentWordWithGuessedLetters();
+				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 				if (WordHandler::isWholeWordGuessed())
 				{
 					//TODO: Player wins
