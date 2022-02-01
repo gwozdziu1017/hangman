@@ -27,7 +27,7 @@ protected:
 	string whGetWordFromDatabase();
 	void setTheWord();
 	string getTheWord();
-	string getCurrentWord();
+	std::vector<char> getCurrentWord();
 	int whGetNoOfLettersInTheWord();
 	bool whIsLetterAlreadyUsed(char _letter);  // checks if letter was previously used
 	void whPutLetterIntoUsedLetters(char _letter);
@@ -37,10 +37,12 @@ protected:
 	void setTheCorrectIndexes(char _letter);
 	std::vector<int> getTheCorrectIndexes();
 	bool isWholeWordGuessed();
+	int getIndexOfGivenLetterInTheWord(char _letter);
+	void fillGuessedLettersIndexes(char _letter);
 private:
 	string theWord;
 	std::vector<char> vectorAlreadyUsedLetters;
 	std::set<short> setGuessedLettersIndexes;
 	std::vector<int> vectorCorrectIndexes;
-	string currentWord;
+	std::vector<char> vCurrentWord;
 };

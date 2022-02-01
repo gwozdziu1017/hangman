@@ -2,13 +2,13 @@
 
 void Menu::fillMenuContext()
 {
-	menuContext = "----- HANGMAN -----\n";
-	menuContext.append("Menu:\n");
-	menuContext.append("[1] Singleplayer mode\n");
-	menuContext.append("[2] Multiplayer mode\n");
-	menuContext.append("[0] Quit");
-	menuContext.append("\n");
-	menuContext.append("Player choice: ");
+	this->menuContext = "----- HANGMAN -----\n";
+	this->menuContext.append("Menu:\n");
+	this->menuContext.append("[1] Singleplayer mode\n");
+	this->menuContext.append("[2] Multiplayer mode\n");
+	this->menuContext.append("[0] Quit");
+	this->menuContext.append("\n");
+	this->menuContext.append("Player choice: ");
 }
 
 void Menu::askForNoOfPlayers()
@@ -18,7 +18,7 @@ void Menu::askForNoOfPlayers()
 
 void Menu::fillAskforNoOfPlayerMenuContext()
 {
-	askforNoOfPlayerMenuContext = "Insert no of players: ";
+	this->askforNoOfPlayerMenuContext = "Insert no of players: ";
 }
 
 void Menu::printWord(std::string _word)
@@ -43,7 +43,21 @@ void Menu::fillAllMenuContexts()
 	fillAskforNoOfPlayerMenuContext();
 }
 
+void Menu::printWord(std::vector<char> _word)
+{
+	for (auto i : _word)
+	{
+		std::cout << i << " ";
+	}
+}
+
+void Menu::printYouWinMessage()
+{
+	system("cls");
+	std::cout << "You win motherfucker!";
+}
+
 void Menu::showMenu()
 {
-	std::cout << menuContext;
+	std::cout << this->menuContext;
 }

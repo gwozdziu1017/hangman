@@ -5,7 +5,7 @@ WordHandler::WordHandler() : theWord(""),
 							vectorAlreadyUsedLetters(),
 							setGuessedLettersIndexes(),
 							vectorCorrectIndexes(),
-							currentWord("")
+							vCurrentWord()
 { }
 
 string WordHandler::whGetWordFromDatabase()
@@ -24,9 +24,9 @@ string WordHandler::getTheWord()
 	return this->theWord;
 }
 
-string WordHandler::getCurrentWord()
+std::vector<char> WordHandler::getCurrentWord()
 {
-	return this->currentWord;
+	return this->vCurrentWord;
 }
 
 int WordHandler::whGetNoOfLettersInTheWord()
@@ -52,17 +52,19 @@ void WordHandler::whPutLetterIntoUsedLetters(char _letter)
 
 void WordHandler::fillCurrentWordWithDashesOnly(short _noOfLetters)
 {
-	for (short i = 0; i++; i < _noOfLetters)
+	for (short i = 0; i < _noOfLetters; i++)
 	{
-		currentWord.append("_"); // pusty current word
+		vCurrentWord.push_back('_');
 	}
 }
 
 void WordHandler::fillCurrentWordWithGuessedLetters()
 {
-	for (auto i : vectorCorrectIndexes)
+	for (std::set<short>::iterator it = setGuessedLettersIndexes.begin();
+		it != setGuessedLettersIndexes.end();
+		it++)
 	{
-		currentWord.insert(i, 1, theWord[i]);
+		vCurrentWord.at(*it) = theWord[*it];
 	}
 }
 
@@ -97,9 +99,36 @@ std::vector<int> WordHandler::getTheCorrectIndexes()
 
 bool WordHandler::isWholeWordGuessed()
 {
-	if (currentWord == theWord)
-		return true;
-	else
-		return false;
+	for (auto it = 0; it < vCurrentWord.size(); it++)
+	{
+		if (vCurrentWord.at(it) != theWord[it])
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int WordHandler::getIndexOfGivenLetterInTheWord(char _letter)
+{
+	auto it = std::find(theWord.begin(), theWord.end(), _letter);
+	if (it != theWord.end()) // if element was found
+	{
+		int index = it - theWord.begin();
+		return index;
+	}
+
+	return -1;	// not found
+}
+
+void WordHandler::fillGuessedLettersIndexes(char _letter)
+{
+	for (auto it = 0; it < theWord.length(); it++)
+	{
+		if (theWord[it] == _letter)
+			setGuessedLettersIndexes.insert(it);
+	}
+
 }
 

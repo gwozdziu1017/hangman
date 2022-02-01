@@ -57,10 +57,13 @@ short GameHandler::getNoOfPlayers()
 	return this->noOfPlayers;
 }
 
+void GameHandler::gameOver()
+{
+
+}
+
 void GameHandler::startSingleplayerMode()
 {
-	std::vector<int>* correctIndexes = new std::vector<int>();
-
 	WordHandler::setTheWord();
 	WordHandler::fillCurrentWordWithDashesOnly(WordHandler::whGetNoOfLettersInTheWord());
 	
@@ -69,7 +72,7 @@ void GameHandler::startSingleplayerMode()
 		Menu::printWord(WordHandler::getCurrentWord());
 
 		Menu::printAskForLetterMenu();
-		this->letter = getUserInput_char();
+		this->letter = toupper(getUserInput_char());
 
 		if (WordHandler::whIsLetterAlreadyUsed(this->letter))
 		{
@@ -80,11 +83,14 @@ void GameHandler::startSingleplayerMode()
 		{
 			if (WordHandler::isLetterInTheWord(this->letter))
 			{
+				WordHandler::fillGuessedLettersIndexes(this->letter);
 				WordHandler::setTheCorrectIndexes(this->letter);
 				WordHandler::fillCurrentWordWithGuessedLetters();
 				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 				if (WordHandler::isWholeWordGuessed())
 				{
+					Menu::printYouWinMessage();
+					break;
 					//TODO: Player wins
 				}
 			}

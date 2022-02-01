@@ -24,15 +24,12 @@ protected:
 
 	void setNoOfPlayers(short _noOfPlayers);
 	short getNoOfPlayers();
+	void gameOver(); // TODO
 	void startSingleplayerMode();
 	void startMultiplayerMode(short _noOfPlayers); //TODO
 	
 private:
-	//short userInput;
 	short noOfPlayers;
-	char letter; // TODO it could be a char
+	char letter;
 	std::string theWord;
-
-	//WordHandler* wordHandlerInstance;
-	//Menu* menu;
 };

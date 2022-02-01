@@ -6,6 +6,7 @@
 */
 
 #include <string>
+#include <vector>
 #include <iostream>
 
 class Menu {
@@ -22,6 +23,8 @@ protected:
 	void fillAskForLetterMenuContext();
 	void printAskForLetterMenu();
 	void fillAllMenuContexts();
+	void printWord(std::vector<char> _word);
+	void printYouWinMessage();
 	
 private:
 	std::string menuContext;
