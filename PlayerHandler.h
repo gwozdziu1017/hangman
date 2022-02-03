@@ -14,8 +14,10 @@ protected:
 	void decreaseUserLives();
 	bool canUserContinue();
 	short getNoOfLives();
+	void setGameOver();
 private:
 	string userName;
 	short userLives;
+	bool gameOver;
 
 };

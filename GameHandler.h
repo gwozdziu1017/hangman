@@ -14,7 +14,6 @@
 class GameHandler : public Menu, PlayerHandler, WordHandler {
 public:
 	GameHandler() { noOfPlayers = 0; letter = 'a'; theWord = ""; };
-	~GameHandler() {};
 	void startGame(); // get input and start single or multiplayer
 protected:
 	void setNoOfPlayers(short _noOfPlayers);

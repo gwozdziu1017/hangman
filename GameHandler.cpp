@@ -14,8 +14,6 @@ void GameHandler::startGame()
 		this->setNoOfPlayers(this->getNoOfPlayers());
 		this->startMultiplayerMode(this->noOfPlayers);
 	case 0:
-		// TODO: this is incorrect way of finishing program, a lot of unfreed memory
-		system("exit");
 		break;
 	default:
 		// TODO: add an error message that input is incorrect
@@ -36,7 +34,8 @@ short GameHandler::getNoOfPlayers()
 
 void GameHandler::gameOver()
 {
-
+	PlayerHandler::setGameOver();
+	Menu::printPressAnyKeyToContinueMessage();
 }
 
 void GameHandler::startSingleplayerMode()
@@ -53,8 +52,7 @@ void GameHandler::startSingleplayerMode()
 
 		if (WordHandler::whIsLetterAlreadyUsed(this->letter))
 		{
-			//TODO print error: letter already used
-			break;
+			Menu::printAlreadyUsedLetterMessage();
 		}
 		else
 		{
@@ -66,15 +64,23 @@ void GameHandler::startSingleplayerMode()
 				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 				if (WordHandler::isWholeWordGuessed())
 				{
+					// Player wins
 					Menu::printYouWinMessage();
-					break;
-					//TODO: Player wins
+					GameHandler::gameOver();
 				}
 			}
 			else
 			{
 				// TODO: print message: wrong letter
 				PlayerHandler::decreaseUserLives();
+				Menu::printWrongLetterMessage();
+				Menu::printUserLives(PlayerHandler::getNoOfLives());
+				if (PlayerHandler::getNoOfLives() == 0)
+				{
+					Menu::printYouLoseMessage();
+					GameHandler::gameOver();
+				}
+				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 			}
 
 		}

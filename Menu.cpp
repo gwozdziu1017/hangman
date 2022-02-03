@@ -41,6 +41,12 @@ void Menu::fillAllMenuContexts()
 	fillMenuContext();
 	fillAskForLetterMenuContext();
 	fillAskforNoOfPlayerMenuContext();
+	fillYouWinMessageContext();
+	fillYouLoseMessageContext();
+	fillAlreadyUsedLetterContext();
+	fillUserLivesMenuContext();
+	fillWrongLetterMessageContext();
+	fillPressAnyKeyToContinueMessageContext();
 }
 
 void Menu::printWord(std::vector<char> _word)
@@ -50,13 +56,74 @@ void Menu::printWord(std::vector<char> _word)
 		IOHandler::sendToConsole(i);
 		IOHandler::sendToConsole(" ");
 	}
+	IOHandler::sendToConsole(this->NEW_LINE);
 }
 
 void Menu::printYouWinMessage()
 {
 	system("cls");
-	IOHandler::sendToConsole("You win motherfucker!");
+	IOHandler::sendToConsole(youWinMessageContext);
 }
+
+void Menu::printYouLoseMessage()
+{
+	system("cls");
+	IOHandler::sendToConsole(youLoseMessageContext);
+}
+
+void Menu::fillYouWinMessageContext()
+{
+	this->youWinMessageContext = "You win motherfucker!";
+}
+
+void Menu::fillYouLoseMessageContext()
+{
+	this->youLoseMessageContext = "You lose motherfucker!";
+}
+
+void Menu::fillAlreadyUsedLetterContext()
+{
+	this->alreadyUsedLetterContext = "This letter was already used.";
+}
+
+void Menu::printAlreadyUsedLetterMessage()
+{
+	IOHandler::sendToConsole(alreadyUsedLetterContext);
+	IOHandler::sendToConsole(this->NEW_LINE);
+}
+
+void Menu::fillUserLivesMenuContext()
+{
+	this->userLivesMenuContext = "Your lives: ";
+}
+
+void Menu::printUserLives(short _lives)
+{
+	IOHandler::sendToConsole(userLivesMenuContext + std::to_string(_lives));
+	IOHandler::sendToConsole<char>(this->NEW_LINE);
+}
+
+void Menu::fillWrongLetterMessageContext()
+{
+	this->wrongLetterMessageContext = "Wrong letter! ";
+}
+
+void Menu::printWrongLetterMessage()
+{
+	IOHandler::sendToConsole(this->wrongLetterMessageContext);
+	IOHandler::sendToConsole(this->NEW_LINE);
+}
+
+void Menu::fillPressAnyKeyToContinueMessageContext()
+{
+	this->pressAnyKeyToContinueMessageContext = "Press any key to continue...";
+}
+
+void Menu::printPressAnyKeyToContinueMessage()
+{
+	IOHandler::sendToConsole(pressAnyKeyToContinueMessageContext);
+}
+
 
 void Menu::showMenu()
 {

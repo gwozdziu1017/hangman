@@ -12,7 +12,6 @@ public:
 	template <typename T> static T getFromConsole();
 	template<typename T> static void sendToConsole(const T _output);
 	static void sendToConsole(const std::vector<char> _output);
-	
 };
 
 
