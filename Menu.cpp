@@ -13,7 +13,7 @@ void Menu::fillMenuContext()
 
 void Menu::askForNoOfPlayers()
 {
-	std::cout << askforNoOfPlayerMenuContext;
+	IOHandler::sendToConsole(askforNoOfPlayerMenuContext);
 }
 
 void Menu::fillAskforNoOfPlayerMenuContext()
@@ -23,7 +23,7 @@ void Menu::fillAskforNoOfPlayerMenuContext()
 
 void Menu::printWord(std::string _word)
 {
-	std::cout << _word;
+	IOHandler::sendToConsole(_word);
 }
 
 void Menu::fillAskForLetterMenuContext()
@@ -33,7 +33,7 @@ void Menu::fillAskForLetterMenuContext()
 
 void Menu::printAskForLetterMenu()
 {
-	std::cout << this->askForLetterMenuContext;
+	IOHandler::sendToConsole(this->askForLetterMenuContext);
 }
 
 void Menu::fillAllMenuContexts()
@@ -47,17 +47,18 @@ void Menu::printWord(std::vector<char> _word)
 {
 	for (auto i : _word)
 	{
-		std::cout << i << " ";
+		IOHandler::sendToConsole(i);
+		IOHandler::sendToConsole(" ");
 	}
 }
 
 void Menu::printYouWinMessage()
 {
 	system("cls");
-	std::cout << "You win motherfucker!";
+	IOHandler::sendToConsole("You win motherfucker!");
 }
 
 void Menu::showMenu()
 {
-	std::cout << this->menuContext;
+	IOHandler::sendToConsole(this->menuContext);
 }

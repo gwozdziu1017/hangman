@@ -9,10 +9,9 @@ public:
 	IOHandler() { };
 	~IOHandler() { };
 
-protected:
-	template <typename T> T getFromConsole();
-	template<typename T> void sendToConsole(T _output);
-	void sendToConsole(std::vector<char> _output);
+	template <typename T> static T getFromConsole();
+	template<typename T> static void sendToConsole(const T _output);
+	static void sendToConsole(const std::vector<char> _output);
 	
 };
 

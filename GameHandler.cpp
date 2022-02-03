@@ -1,32 +1,9 @@
 #include "GameHandler.h"
 
-short GameHandler::getUserInput_short()
-{
-	short tempUserInput = 0;
-	std::cin >> tempUserInput;
-	return tempUserInput;
-}
-
-std::string GameHandler::getUserInput_string()
-{
-	std::string tempUserInput;
-	std::cin >> tempUserInput;
-
-	return tempUserInput;
-}
-
-char GameHandler::getUserInput_char()
-{
-	char tempUserInput;
-	std::cin >> tempUserInput;
-
-	return tempUserInput;
-}
-
 void GameHandler::startGame()
 {
 	Menu::showMenu();
-	short tempUserInput_short = getUserInput_short();
+	short tempUserInput_short = IOHandler::getFromConsole<int>();
 	switch (tempUserInput_short)
 	{
 	case 1: // singleplayer
@@ -72,7 +49,7 @@ void GameHandler::startSingleplayerMode()
 		Menu::printWord(WordHandler::getCurrentWord());
 
 		Menu::printAskForLetterMenu();
-		this->letter = toupper(getUserInput_char());
+		this->letter = toupper(IOHandler::getFromConsole<char>());
 
 		if (WordHandler::whIsLetterAlreadyUsed(this->letter))
 		{
