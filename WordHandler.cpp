@@ -1,8 +1,12 @@
 #include "WordHandler.h"
 
-WordHandler::WordHandler() : sTheWord(nullptr), vAlreadyUsedLetters(0), sCurrentWord(nullptr) {}
-WordHandler::~WordHandler() {}
 
+WordHandler::WordHandler() : theWord(""),
+							vectorAlreadyUsedLetters(),
+							setGuessedLettersIndexes(),
+							vectorCorrectIndexes(),
+							vCurrentWord()
+{ }
 
 string WordHandler::whGetWordFromDatabase()
 {
@@ -10,58 +14,121 @@ string WordHandler::whGetWordFromDatabase()
 	return "HANGMAN";
 }
 
-short WordHandler::whGetNoOfLettersInWord(string _word)
+void WordHandler::setTheWord()
 {
-	return _word.length;
+	this->theWord.assign(this->whGetWordFromDatabase());
 }
 
-bool WordHandler::whFillTheWord(char _letter)
+string WordHandler::getTheWord()
 {
-	bool isFoundInWord = false;
+	return this->theWord;
+}
 
-	for (short i = 0; i < this->sTheWord->length; i++)
-	{
-		if (_letter == sTheWord->at(i))
-		{
-			whShowLetterAtGivenIndex(i);
-			whPutLetterIntoUsedLetters(_letter);
-			isFoundInWord = true;
-		}
-	}
-	return isFoundInWord;
+std::vector<char> WordHandler::getCurrentWord()
+{
+	return this->vCurrentWord;
+}
+
+int WordHandler::whGetNoOfLettersInTheWord()
+{
+	return this->theWord.length();
 }
 
 bool WordHandler::whIsLetterAlreadyUsed(char _letter)
 {
-	if (vAlreadyUsedLetters.empty())
+	if (vectorAlreadyUsedLetters.empty())
 		return false;
 
-	if (std::find(vAlreadyUsedLetters.begin(), vAlreadyUsedLetters.end(), _letter) != vAlreadyUsedLetters.end())
+	if (std::find(vectorAlreadyUsedLetters.begin(), vectorAlreadyUsedLetters.end(), _letter) != vectorAlreadyUsedLetters.end())
 		return true;
 	else
 		return false;
 }
 
-void WordHandler::whShowLetterAtGivenIndex(short _index)
-{
-}
-
 void WordHandler::whPutLetterIntoUsedLetters(char _letter)
 {
-	this->sTheWord->push_back(_letter);
+	vectorAlreadyUsedLetters.push_back(_letter);
 }
 
-void WordHandler::whCheckTheWord(char _letter)
+void WordHandler::fillCurrentWordWithDashesOnly(short _noOfLetters)
 {
-	for (int i = 0; i < this->sTheWord->length; i++)
+	for (short i = 0; i < _noOfLetters; i++)
 	{
-		if (_letter == sTheWord->at(i))
-		{
-			this->vGuessedLettersIndexes->insert(i);
-		}
+		vCurrentWord.push_back('_');
 	}
 }
 
-void WordHandler::whPrintCurrentWord()
+void WordHandler::fillCurrentWordWithGuessedLetters()
 {
+	for (std::set<short>::iterator it = setGuessedLettersIndexes.begin();
+		it != setGuessedLettersIndexes.end();
+		it++)
+	{
+		vCurrentWord.at(*it) = theWord[*it];
+	}
 }
+
+bool WordHandler::isLetterInTheWord(char _letter)
+{
+	for (auto letterInTheWord : theWord)
+	{
+		if (letterInTheWord == _letter)
+			return true;
+	}
+	return false;
+}
+
+void WordHandler::setTheCorrectIndexes(char _letter)
+{
+	short tempIndex = 0;
+	for (auto letterInTheWord : theWord)
+	{
+		if (_letter == letterInTheWord)
+		{
+			vectorCorrectIndexes.push_back(tempIndex);
+		}
+		tempIndex++;
+	}
+	std::sort(vectorCorrectIndexes.begin(), vectorCorrectIndexes.end());
+}
+
+std::vector<int> WordHandler::getTheCorrectIndexes()
+{
+	return this->vectorCorrectIndexes;
+}
+
+bool WordHandler::isWholeWordGuessed()
+{
+	for (auto it = 0; it < vCurrentWord.size(); it++)
+	{
+		if (vCurrentWord.at(it) != theWord[it])
+		{
+			return false;
+		}
+	}
+
+	return true;
+}
+
+int WordHandler::getIndexOfGivenLetterInTheWord(char _letter)
+{
+	auto it = std::find(theWord.begin(), theWord.end(), _letter);
+	if (it != theWord.end()) // if element was found
+	{
+		int index = it - theWord.begin();
+		return index;
+	}
+
+	return -1;	// not found
+}
+
+void WordHandler::fillGuessedLettersIndexes(char _letter)
+{
+	for (auto it = 0; it < theWord.length(); it++)
+	{
+		if (theWord[it] == _letter)
+			setGuessedLettersIndexes.insert(it);
+	}
+
+}
+

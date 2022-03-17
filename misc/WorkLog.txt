@@ -3,5 +3,8 @@
 |04.01.2022	|		Classes skeleton and implementation of	|	2:00|
 |			|		WordHandler class						|		|
 |-----------|-----------------------------------------------|-------|
-|05.01.2022-|	Finishing WordHandler and first manual tests|	2:00|
+|05.01.2022 |	Finishing WordHandler and first manual tests|	2:00|
 |-----------|-----------------------------------------------|-------|
+|17.01.2022 |       General coding in whole classes         |   2:00|
+|-----------|-----------------------------------------------|-------|
+|27.01.2022 | Fixing constructors and first debugging       |   2:00|
