@@ -61,13 +61,11 @@ void Menu::printWord(std::vector<char> _word)
 
 void Menu::printYouWinMessage()
 {
-	system("cls");
 	IOHandler::sendToConsole(youWinMessageContext);
 }
 
 void Menu::printYouLoseMessage()
 {
-	system("cls");
 	IOHandler::sendToConsole(youLoseMessageContext);
 }
 
