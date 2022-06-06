@@ -47,6 +47,7 @@ void Menu::fillAllMenuContexts()
 	fillUserLivesMenuContext();
 	fillWrongLetterMessageContext();
 	fillPressAnyKeyToContinueMessageContext();
+	fillAskForNameMenuContext();
 }
 
 void Menu::printWord(std::vector<char> _word)
@@ -126,4 +127,19 @@ void Menu::printPressAnyKeyToContinueMessage()
 void Menu::showMenu()
 {
 	IOHandler::sendToConsole(this->menuContext);
+}
+
+void Menu::fillAskForNameMenuContext()
+{
+	this->askForNameMenuContext = "Enter name: ";
+}
+
+void Menu::fillAskForNameMenuContext(const int _playerNumber)
+{
+	this->askForNameMenuContext = "Enter name for player " + std::to_string(_playerNumber) + ": ";
+}
+
+void Menu::printAskForNameMenuContext()
+{
+	IOHandler::sendToConsole(askForNameMenuContext);
 }

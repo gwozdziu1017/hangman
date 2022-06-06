@@ -44,6 +44,9 @@ protected:
 	void printWrongLetterMessage();
 	void fillPressAnyKeyToContinueMessageContext();
 	void printPressAnyKeyToContinueMessage();
+	void fillAskForNameMenuContext();
+	void fillAskForNameMenuContext(const int _playerNumber);
+	void printAskForNameMenuContext();
 	
 private:
 	std::string menuContext;
@@ -55,5 +58,6 @@ private:
 	std::string userLivesMenuContext;
 	std::string wrongLetterMessageContext;
 	std::string pressAnyKeyToContinueMessageContext;
+	std::string askForNameMenuContext;
 	char NEW_LINE;
 };
