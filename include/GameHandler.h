@@ -5,6 +5,7 @@
 
 #include <string>
 #include <algorithm>
+#include <type_traits>
 
 #include "../include/Menu.h"
 #include "../include/PlayerHandler.h"

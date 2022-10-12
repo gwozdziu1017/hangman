@@ -16,7 +16,8 @@ bool GameHandler::run()
 void GameHandler::startGame()
 {
 	Menu::showMenu();
-	short tempUserInput_short = IOHandler::getFromConsole<int>();
+	int tempUserInput_short = IOHandler::getFromConsole<int>();
+
 	switch (tempUserInput_short)
 	{
 	case 1:{ // singleplayer
@@ -30,7 +31,8 @@ void GameHandler::startGame()
 		this->startMultiplayerMode(this->noOfPlayers);
 		break;
 	}
-	case 0:{
+	case 3:{
+		GameHandler::setGameOver(true);
 		break;
 	}
 	default:{
@@ -205,12 +207,11 @@ void GameHandler::startMultiplayerMode(short _noOfPlayers)
 				{
 					// Player wins
 					Menu::printYouWinMessage();
-					Menu::printPressAnyKeyToContinueMessage();
+					GameHandler::setGameOver(true);
 				}
 			}
 			else
 			{
-				// TODO: print message: wrong letter
 				vectorOfPlayers[playerId] -> decreaseUserLives();
 				Menu::printWrongLetterMessage();
 				IOHandler::sendToConsole(vectorOfPlayers[playerId]->getUserName() + " ");
@@ -218,7 +219,6 @@ void GameHandler::startMultiplayerMode(short _noOfPlayers)
 				if (vectorOfPlayers[playerId] -> getNoOfLives() == 0)
 				{
 					Menu::printYouLoseMessage();
-					//GameHandler::gameOver();
 				}
 				playerId = this->getNextPlayerId(vectorOfPlayers, playerId);
 				if(playerId == -1)
@@ -227,7 +227,6 @@ void GameHandler::startMultiplayerMode(short _noOfPlayers)
 
 				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 			}
-
 		}
 	}
 }

@@ -6,7 +6,7 @@ void Menu::fillMenuContext()
 	this->menuContext.append("Menu:\n");
 	this->menuContext.append("[1] Singleplayer mode\n");
 	this->menuContext.append("[2] Multiplayer mode\n");
-	this->menuContext.append("[0] Quit");
+	this->menuContext.append("[3] Quit");
 	this->menuContext.append("\n");
 	this->menuContext.append("Player choice: ");
 }
