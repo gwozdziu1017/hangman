@@ -261,6 +261,7 @@ int GameHandler::getNextPlayerId(std::vector<std::shared_ptr<PlayerHandler> > ve
 				return playerPtr->getPlayerId();
 		}
 	}
+	return -1;
 }
 
 void GameHandler::setGameOver(bool value)
