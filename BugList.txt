@@ -1,5 +1,5 @@
 1. Open app -> when asked to select game mode give the letter instead of number [done]
-2. Open app -> multiplayer mode -> set no of players (e.g. 2) -> when asked about player name put enter
+2. Open app -> multiplayer mode -> set no of players (e.g. 2) -> when asked about player name put enter [not observed]
 3. Open app -> in both modes -> when asked about letter try to put more than one.
     Here we should have option for placing whole word but it has to be handled differently
 4. Open app -> try different key than letters and numbers (e. g. arrow). Occurs in later phases of game as well
