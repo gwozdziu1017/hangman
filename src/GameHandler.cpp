@@ -35,10 +35,31 @@ void GameHandler::startGame()
 	}
 	case 2:{ // multiplayer
 		Menu::askForNoOfPlayers();
-		auto _noOfPlayers = IOHandler::getFromConsole<int>();
-		this->setNoOfPlayers(_noOfPlayers);
-		this->startMultiplayerMode(this->noOfPlayers);
-		break;
+		std::string _noOfPlayersBeforeConversion = IOHandler::getFromConsole<std::string>();
+		try
+		{
+			int _noOfPlayers { stoi(_noOfPlayersBeforeConversion) };
+			if(_noOfPlayers > 0)
+			{
+				this->setNoOfPlayers(_noOfPlayers);
+				this->startMultiplayerMode(this->noOfPlayers);
+			}
+			else
+			{
+				IOHandler::sendToConsole("Number of players is invalid\n");
+			}
+			break;
+		}
+		catch(const std::invalid_argument& e)
+		{
+			IOHandler::sendToConsole("There was a problem with given no of players\n");
+			break;
+		}
+		catch(const std::exception& e)
+		{
+			IOHandler::sendToConsole("An problem occured.");
+			break;
+		}
 	}
 	case 3:{
 		GameHandler::setGameOver(true);
@@ -50,6 +71,8 @@ void GameHandler::startGame()
 		break;
 	}
 	}
+	if(!GameHandler::isGameOver())
+		GameHandler::startGame();
 }
 
 /*
