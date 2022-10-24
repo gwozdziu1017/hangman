@@ -16,9 +16,18 @@ bool GameHandler::run()
 void GameHandler::startGame()
 {
 	Menu::showMenu();
-	int tempUserInput_short = IOHandler::getFromConsole<int>();
+	std::string userInputString = IOHandler::getFromConsole<std::string>();
+	short userInput {0};
+	try
+	{
+		userInput = std::stoi (userInputString);
+	}
+	catch(const std::exception& e)
+	{
+		userInput = 0;
+	}
 
-	switch (tempUserInput_short)
+	switch (userInput)
 	{
 	case 1:{ // singleplayer
 		this->startSingleplayerMode();
