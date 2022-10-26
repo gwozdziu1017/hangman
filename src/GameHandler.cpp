@@ -57,7 +57,7 @@ void GameHandler::startGame()
 		}
 		catch(const std::exception& e)
 		{
-			IOHandler::sendToConsole("An problem occured.");
+			IOHandler::sendToConsole("A problem occured.");
 			break;
 		}
 	}
