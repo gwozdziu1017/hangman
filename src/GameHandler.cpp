@@ -210,7 +210,6 @@ void GameHandler::startMultiplayerMode(short _noOfPlayers)
 	std::vector<std::shared_ptr<PlayerHandler> > vectorOfPlayers;
 	vectorOfPlayers.reserve(_noOfPlayers);
 	this->setupPlayers(_noOfPlayers, vectorOfPlayers);
-	bool switchPlayer = false;
 	int playerId = 0;
 
 	WordHandler::setTheWord();
@@ -255,7 +254,6 @@ void GameHandler::startMultiplayerMode(short _noOfPlayers)
 				playerId = this->getNextPlayerId(vectorOfPlayers, playerId);
 				if(playerId == -1)
 					this->setGameOver(true);
-				switchPlayer = true;
 
 				WordHandler::whPutLetterIntoUsedLetters(this->letter);
 			}
