@@ -1,4 +1,4 @@
-#include "WordHandler.h"
+#include "../include/WordHandler.h"
 
 
 WordHandler::WordHandler() : theWord(""),
@@ -6,14 +6,27 @@ WordHandler::WordHandler() : theWord(""),
 							setGuessedLettersIndexes(),
 							vectorCorrectIndexes(),
 							vCurrentWord()
-{ }
+{ this->fillVectorOfWords();}
 
+void WordHandler::fillVectorOfWords()
+{
+	std::ifstream in("input.txt");
+	string tempWord;
+	while(std::getline(in, tempWord))
+	{
+		if(tempWord.size() > 0)
+			this->vectorOfWords.push_back(tempWord);
+	}
+	in.close();
+}
 string WordHandler::whGetWordFromDatabase()
 {
-	// currently returns only one word
-	return "HANGMAN";
-}
+	std::random_device rd;
+	std::mt19937 g(rd());
+	std::shuffle(this->vectorOfWords.begin(), this->vectorOfWords.end(), g);
 
+	return this->vectorOfWords[0];
+}
 void WordHandler::setTheWord()
 {
 	this->theWord.assign(this->whGetWordFromDatabase());

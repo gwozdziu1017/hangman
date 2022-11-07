@@ -1,4 +1,4 @@
-#include "Menu.h"
+#include "../include/Menu.h"
 
 void Menu::fillMenuContext()
 {
@@ -6,7 +6,7 @@ void Menu::fillMenuContext()
 	this->menuContext.append("Menu:\n");
 	this->menuContext.append("[1] Singleplayer mode\n");
 	this->menuContext.append("[2] Multiplayer mode\n");
-	this->menuContext.append("[0] Quit");
+	this->menuContext.append("[3] Quit");
 	this->menuContext.append("\n");
 	this->menuContext.append("Player choice: ");
 }
@@ -47,6 +47,7 @@ void Menu::fillAllMenuContexts()
 	fillUserLivesMenuContext();
 	fillWrongLetterMessageContext();
 	fillPressAnyKeyToContinueMessageContext();
+	fillAskForNameMenuContext();
 }
 
 void Menu::printWord(std::vector<char> _word)
@@ -61,13 +62,11 @@ void Menu::printWord(std::vector<char> _word)
 
 void Menu::printYouWinMessage()
 {
-	system("cls");
 	IOHandler::sendToConsole(youWinMessageContext);
 }
 
 void Menu::printYouLoseMessage()
 {
-	system("cls");
 	IOHandler::sendToConsole(youLoseMessageContext);
 }
 
@@ -128,4 +127,19 @@ void Menu::printPressAnyKeyToContinueMessage()
 void Menu::showMenu()
 {
 	IOHandler::sendToConsole(this->menuContext);
+}
+
+void Menu::fillAskForNameMenuContext()
+{
+	this->askForNameMenuContext = "Enter name: ";
+}
+
+void Menu::fillAskForNameMenuContext(const int _playerNumber)
+{
+	this->askForNameMenuContext = "Enter name for player " + std::to_string(_playerNumber) + ": ";
+}
+
+void Menu::printAskForNameMenuContext()
+{
+	IOHandler::sendToConsole(askForNameMenuContext);
 }

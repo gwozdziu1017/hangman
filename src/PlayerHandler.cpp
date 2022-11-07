@@ -1,6 +1,6 @@
-#include "PlayerHandler.h"
+#include "../include/PlayerHandler.h"
 
-PlayerHandler::PlayerHandler() : userName(" "), userLives(5), gameOver(false)
+PlayerHandler::PlayerHandler() : userName(" "), userLives(5)
 { }
 
 void PlayerHandler::setUserName(string _userName)
@@ -20,8 +20,7 @@ void PlayerHandler::decreaseUserLives()
 
 bool PlayerHandler::canUserContinue()
 {
-	if (this->getNoOfLives() == 0
-		|| this->gameOver == true)
+	if (this->getNoOfLives() == 0)
 		return false;
 	else
 		return true;
@@ -32,7 +31,7 @@ short PlayerHandler::getNoOfLives()
 	return userLives;
 }
 
-void PlayerHandler::setGameOver()
+int PlayerHandler::getPlayerId()
 {
-	this->gameOver = true;
+	return playerId;
 }

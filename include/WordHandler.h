@@ -15,6 +15,8 @@ Prefix: wh
 #include <string>
 #include <set>
 #include <algorithm>
+#include <fstream>
+#include <random>
 
 typedef std::string string;
 
@@ -39,10 +41,12 @@ protected:
 	bool isWholeWordGuessed();
 	int getIndexOfGivenLetterInTheWord(char _letter);
 	void fillGuessedLettersIndexes(char _letter);
+	void fillVectorOfWords();
 private:
 	string theWord;
 	std::vector<char> vectorAlreadyUsedLetters;
 	std::set<short> setGuessedLettersIndexes;
 	std::vector<int> vectorCorrectIndexes;
 	std::vector<char> vCurrentWord;
+	std::vector<string> vectorOfWords;
 };
